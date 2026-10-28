@@ -3,6 +3,7 @@ package pathlink
 import org.junit.Test
 import org.junit.Assert.*
 import com.pathlink.game.Board
+import com.pathlink.game.BoardGenerator
 import com.pathlink.game.Tile
 
 /**
@@ -13,11 +14,12 @@ class SolverTest {
 
     /** Доска 2x2 с циклом (0,0)-(1,0)-(1,1)-(0,1)-(0,0): решена в нулевом состоянии. */
     private fun solved2x2(): Board {
+        // Порядок массива: индекс = y * size + x
         val tiles = arrayOf(
             Tile(north = false, east = true, south = true, west = false),  // (0,0)
             Tile(north = false, east = false, south = true, west = true),  // (1,0)
-            Tile(north = true, east = false, south = false, west = true),  // (1,1)
-            Tile(north = true, east = true, south = false, west = false)   // (0,1)
+            Tile(north = true, east = true, south = false, west = false),  // (0,1)
+            Tile(north = true, east = false, south = false, west = true)   // (1,1)
         )
         return Board(2, tiles, generated = tiles.map { it.copy() }.toTypedArray())
     }

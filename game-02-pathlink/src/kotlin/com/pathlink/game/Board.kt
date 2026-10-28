@@ -140,7 +140,7 @@ object BoardGenerator {
             if (x < size - 1 && !visited[i + 1]) dirs.add(i + 1)
             if (dirs.isEmpty()) continue
             // Перемешиваем соседей
-            for (j in dirs.indices - 1 downTo 1) {
+            for (j in dirs.size - 1 downTo 1) {
                 val k = rnd.nextInt(j + 1)
                 val tmp = dirs[j]; dirs[j] = dirs[k]; dirs[k] = tmp
             }

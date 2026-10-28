@@ -51,8 +51,6 @@ class Progress {
             .filter { stars.containsKey(it) }
             .joinToString(";") { "$it:${stars[it]}:${bestMoves[it] ?: 0}" }
 
-    fun deserialize() = Unit // загрузка через фабрику
-
     companion object {
         /** Рейтинг: 3 звезды — ровно par, 2 — до 1.5*par, иначе 1. */
         fun starsFor(moves: Int, par: Int): Int = when {

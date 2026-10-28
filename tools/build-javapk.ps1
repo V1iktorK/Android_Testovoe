@@ -72,14 +72,19 @@ if ($LASTEXITCODE -ne 0) { throw "d8 упал (код $LASTEXITCODE)" }
 if (-not (Test-Path (Join-Path $dexdir "classes.dex"))) { throw "classes.dex не создан" }
 
 # --- 3. Ресурсы + манифест (aapt2 link) -----------------------------------
+# aapt2 не работает с не-ASCII путями - компилируем ресурсы в ASCII-каталоге
+$safeName = Split-Path $GameDir -Leaf
 $unsigned = Join-Path $build "app-unsigned.apk"
 $linkArgs = @("link", "-I", $AJAR, "--manifest", $manifest, "--min-sdk-version", "24",
               "--target-sdk-version", "34", "--version-code", $VersionCode, "--version-name", $VersionName,
               "-o", $unsigned)
 $resDir = Join-Path $proj "res"
 if (Test-Path $resDir) {
-    $resZip = Join-Path $build "res.zip"
-    & "$BT\aapt2.exe" compile --dir $resDir -o $resZip 2>&1 | Select-Object -Last 4
+    $aaptWork = "C:\gamedev-work\res-$safeName"
+    if (Test-Path $aaptWork) { Remove-Item $aaptWork -Recurse -Force }
+    Copy-Item $resDir $aaptWork -Recurse
+    $resZip = "$aaptWork\res.zip"
+    & "$BT\aapt2.exe" compile --dir $aaptWork -o $resZip 2>&1 | Select-Object -Last 4
     if ($LASTEXITCODE -ne 0) { throw "aapt2 compile упал" }
     $linkArgs += $resZip
 }
@@ -98,7 +103,6 @@ if ($LASTEXITCODE -ne 0) { throw "zipalign упал" }
 
 $art = Join-Path $REPO_ROOT "$GameDir\artifacts"
 New-Item -ItemType Directory -Force -Path $art | Out-Null
-$safeName = Split-Path $GameDir -Leaf
 $ks = Join-Path $art "release.keystore"
 if (-not (Test-Path $ks)) {
     Write-Host ">> keytool: генерация ключа подписи"

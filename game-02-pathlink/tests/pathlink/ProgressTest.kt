@@ -48,7 +48,7 @@ class ProgressTest {
         val restored = Progress.deserialize(text)
         assertEquals(3, restored.starsForLevel(1))
         assertEquals(2, restored.starsForLevel(2))
-        assertEquals(2, restored.totalStars())
+        assertEquals("Всего звёзд: 3 + 2", 5, restored.totalStars())
     }
 
     @Test
