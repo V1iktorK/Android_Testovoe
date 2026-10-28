@@ -121,3 +121,22 @@ Android_Testovoe/
 - Все тесты зелёные, все APK собраны и лежат в `artifacts/`, в README — ссылка на папку Google Диска.
 - В `REGISTRY.md` — подтверждение уникальности по трём осям для каждой пары игр.
 - Push выполнен, коммиты по шаблону `feat: add game XX - [название]`.
+
+---
+
+## 10. Правки в план по ходу работ (реально применено)
+
+1. **Конвейер Java/Kotlin без Gradle**: вместо Gradle+AGP (тяжёлые загрузки, капризная сеть)
+   APK собираются напрямую — `javac/kotlinc → d8 → aapt2 → zipalign → apksigner`
+   (инструменты из Android SDK Unity). Kotlin-компилятор — `kotlin-compiler-embeddable` + зависимости.
+2. **ASCII-рабочие каталоги**: Unity Android Tools, CMake/NDK, aapt2 и minizip в Godot не работают
+   с кириллицей в путях — все сборки идут через `C:\gamedev-work\` (копия проекта, Gradle home, TEMP).
+3. **Godot**: настройки Android-экспорта живут в версионном `editor_settings-4.3.tres`;
+   APPDATA/LOCALAPPDATA перенаправляются на ASCII-путь при экспорте; экспорту предшествует `--import`;
+   добавлены повторы экспорта из-за флаки minizip (лок временных файлов).
+4. **Unity**: minSdk — 26 (Unity 6 отказался от 24); Mono-бэкенд для скорости сборок (ARM64+ARMv7),
+   IL2CPP доступен флагом `-Il2cpp`; ожидание сборки — по процессам проекта (Unity перезапускается).
+5. **Экранирование PowerShell**: все `.ps1` в UTF-8 с BOM; `@argfile` для javac — в ANSI,
+   для kotlinc — в UTF-8; пути в argfile — со слешами вперёд.
+6. **Формат структуры игр**: Unity-игры хранят тесты в `src/Assets/Tests/EditMode`,
+   остальные — в `tests/` на верхнем уровне (по соглашению стека).
