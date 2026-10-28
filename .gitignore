@@ -30,6 +30,8 @@ export_presets.cfg.bak
 # Java / Kotlin / Gradle
 .gradle/
 build/
+build-test/
+build-shot/
 local.properties
 captures/
 *.dex
