@@ -80,7 +80,12 @@ for ($attempt = 1; $attempt -le 3 -and -not $ok; $attempt++) {
     $log = Join-Path $art "build.log"
     cmd /c "`"$GODOT_EXE`" --headless --path `"$proj`" --export-release $Preset `"$asciiOut`" > `"$log`" 2>&1"
     if ((Test-Path $asciiOut) -and ((Get-Item $asciiOut).Length -gt 1MB)) { $ok = $true }
-    else { Start-Sleep -Seconds 5; Remove-Item "$GD_LOCAL\Godot\tmpexport-*" -Force -ErrorAction SilentlyContinue }
+    else {
+        # флаки minizip: даём антивирусу и системе время освободить временный файл
+        Start-Sleep -Seconds (30 * $attempt)
+        Remove-Item "$GD_LOCAL\Godot\tmpexport-*" -Force -ErrorAction SilentlyContinue
+        Remove-Item $asciiOut -Force -ErrorAction SilentlyContinue
+    }
 }
 if (-not $ok) {
     Get-Content $log -Tail 20 | Write-Host
