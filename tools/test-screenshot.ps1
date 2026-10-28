@@ -1,4 +1,4 @@
-# tools/test-screenshot.ps1 - генерация screenshot.png для Java/Kotlin игр
+﻿# tools/test-screenshot.ps1 - генерация screenshot.png для Java/Kotlin игр
 # В game-NN/assets-gen/ лежит ScreenshotGen.java|kt с методом main, который пишет PNG.
 # Использование: tools\test-screenshot.ps1 -GameDir game-03-neonidle
 param(

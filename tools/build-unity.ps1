@@ -59,12 +59,21 @@ if (Test-Path $ks) { Copy-Item $ks "$work\release.keystore" -Force }
 
 Write-Host ">> Unity build: $GameDir -> $out"
 $sw = [Diagnostics.Stopwatch]::StartNew()
-& $UNITY_EXE $uargs
-$code = $LASTEXITCODE
+Start-Process -FilePath $UNITY_EXE -ArgumentList $uargs | Out-Null
+
+# Unity перезапускается внутри - дожидаемся завершения ВСЕХ процессов этого проекта
+$deadline = (Get-Date).AddMinutes(90)
+while ((Get-Date) -lt $deadline) {
+    Start-Sleep -Seconds 15
+    $active = Get-CimInstance Win32_Process -Filter "Name='Unity.exe'" |
+        Where-Object { $_.CommandLine -like "*gamedev-work*$safeName*" }
+    if (-not $active) { break }
+}
 $sw.Stop()
-if ($code -ne 0 -or -not (Test-Path "$work\$safeName.apk")) {
-    Get-Content $log -Tail 30 | Write-Host
-    throw "Unity-сборка не удалась (код $code, $($sw.Elapsed))"
+$ok = Test-Path "$work\$safeName.apk"
+if (-not $ok) {
+    if (Test-Path $log) { Get-Content $log -Tail 30 | Write-Host }
+    throw "Unity-сборка не удалась ($($sw.Elapsed))"
 }
 Copy-Item "$work\$safeName.apk" $out -Force
 Write-Host "OK APK: $out ($([math]::Round((Get-Item $out).Length/1MB,1)) MB, $($sw.Elapsed))"
