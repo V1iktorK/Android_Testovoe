@@ -1,0 +1,12 @@
+; Engine configuration file - Godot 4.3 smoke project.
+config_version=5
+
+[application]
+
+config/name="SmokeGodot"
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.3")
+
+[rendering]
+
+renderer/rendering_method="mobile"
