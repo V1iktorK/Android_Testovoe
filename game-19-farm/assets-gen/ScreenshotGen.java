@@ -1,5 +1,6 @@
 package farm.gen;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
@@ -17,12 +18,12 @@ import javax.imageio.ImageIO;
  */
 public final class ScreenshotGen {
 
-    private static final Color SKY = new Color(255, 236, 214);
-    private static final Color GRASS = new Color(154, 205, 130);
-    private static final Color SOIL = new Color(166, 124, 82);
+    private static final Color SKY = new Color(250, 246, 233);
+    private static final Color GRASS = new Color(216, 226, 188);
+    private static final Color SOIL = new Color(150, 122, 96);
     private static final Color PANEL = new Color(255, 250, 240);
     private static final Color TEXT = new Color(104, 72, 52);
-    private static final Color ACCENT = new Color(238, 150, 98);
+    private static final Color ACCENT = new Color(240, 160, 90);
     private static final Color SPROUT = new Color(120, 180, 100);
     private static final Color RIPE = new Color(242, 190, 90);
 
@@ -40,7 +41,16 @@ public final class ScreenshotGen {
         Graphics2D g = img.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setPaint(new GradientPaint(0, 0, SKY, 0, h * 0.55f, new Color(255, 220, 190)));
-        g.fillRect(0, 0, w, h);
+                g.fillRect(0, 0, w, h);
+
+        // клетчатая бумага скетчбука
+        g.setColor(new Color(205, 215, 228));
+        g.setStroke(new BasicStroke(2f));
+        for (int x = 0; x <= w; x += 96) g.drawLine(x, 0, x, h);
+        for (int y = 0; y <= h; y += 96) g.drawLine(0, y, w, y);
+        g.setColor(new Color(238, 190, 190));
+        g.setStroke(new BasicStroke(5f));
+        g.drawLine((int) (w * 0.1), 0, (int) (w * 0.1), h);
         g.setColor(GRASS);
         g.fillRect(0, h / 2, w, h / 2);
 

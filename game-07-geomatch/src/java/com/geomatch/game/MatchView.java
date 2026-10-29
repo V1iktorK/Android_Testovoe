@@ -78,6 +78,13 @@ public final class MatchView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(bg);
+        // сигнатура Баухаус: цветные угловые модули
+        paint.setColor(TILE_COLORS[1]);
+        canvas.drawRect(0, 0, getWidth() * 0.06f, getHeight() * 0.06f, paint);
+        paint.setColor(TILE_COLORS[2]);
+        canvas.drawCircle(getWidth() * 0.96f, getHeight() * 0.03f, getWidth() * 0.035f, paint);
+        paint.setColor(TILE_COLORS[0]);
+        canvas.drawRect(getWidth() * 0.93f, getHeight() * 0.94f, getWidth(), getHeight(), paint);
         buttons.clear();
         switch (state) {
             case Menu:

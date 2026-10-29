@@ -23,7 +23,7 @@ public final class ScreenshotGen {
     private static final Color BELT = new Color(41, 44, 51);
     private static final Color STATION = new Color(74, 115, 158);
     private static final Color STATION_TOP = new Color(92, 217, 140);
-    private static final Color LAMP = new Color(255, 214, 92);
+    private static final Color LAMP = new Color(102, 242, 255);
     private static final Color TEXT = new Color(236, 240, 250);
     private static final Color ACCENT = new Color(122, 199, 255);
     private static final Color PANEL = new Color(24, 28, 36, 210);

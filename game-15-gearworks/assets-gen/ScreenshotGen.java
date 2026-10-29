@@ -40,6 +40,11 @@ public final class ScreenshotGen {
         g.setColor(BG);
         g.fillRect(0, 0, w, h);
 
+        // штриховка патентного чертежа
+        g.setColor(new Color(58, 45, 35));
+        g.setStroke(new BasicStroke(2f));
+        for (int gx = 0; gx <= w; gx += 96) g.drawLine(gx, 0, gx, h);
+        for (int gy = 0; gy <= h; gy += 96) g.drawLine(0, gy, w, gy);
         // Верхняя панель
         g.setColor(PANEL);
         g.fillRect(0, 0, w, (int) (h * 0.15));

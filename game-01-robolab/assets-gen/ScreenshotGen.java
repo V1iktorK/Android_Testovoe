@@ -25,7 +25,7 @@ public final class ScreenshotGen {
     private static final Color ROBOT = new Color(191, 209, 235);
     private static final Color ROBOT_DARK = new Color(102, 115, 140);
     private static final Color EYE = new Color(38, 217, 229);
-    private static final Color BATTERY = new Color(242, 209, 64);
+    private static final Color BATTERY = new Color(51, 242, 115);
     private static final Color SPIKE = new Color(217, 76, 89);
     private static final Color DOOR = new Color(64, 178, 242);
     private static final Color DOOR_IN = new Color(140, 255, 217);
@@ -100,7 +100,7 @@ public final class ScreenshotGen {
                     case 'b':
                         g.setColor(BATTERY);
                         g.fillRect(px + half / 4, py + half / 6, half / 2, half * 2 / 3);
-                        g.setColor(new Color(89, 230, 115));
+                        g.setColor(new Color(242, 255, 247));
                         g.fillRect(px + half / 3, py + half / 3, half / 3, half / 3);
                         break;
                     case 'E':
@@ -161,7 +161,7 @@ public final class ScreenshotGen {
         drawRobot(g, 30, 40, 132);
         g.setColor(BATTERY);
         g.fillRect(142, 20, 22, 34);
-        g.setColor(new Color(89, 230, 115));
+        g.setColor(new Color(242, 255, 247));
         g.fillRect(147, 28, 12, 14);
         g.dispose();
         out.getParentFile().mkdirs();

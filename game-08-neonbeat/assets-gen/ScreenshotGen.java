@@ -17,8 +17,8 @@ import javax.imageio.ImageIO;
  */
 public final class ScreenshotGen {
 
-    private static final Color BG = new Color(13, 10, 31);
-    private static final Color LANE_BG = new Color(20, 18, 51);
+    private static final Color BG = new Color(38, 13, 66);
+    private static final Color LANE_BG = new Color(52, 20, 88);
     private static final Color[] LANE_COLORS = {
             new Color(51, 242, 242), new Color(255, 89, 191),
             new Color(140, 230, 77), new Color(242, 204, 64)

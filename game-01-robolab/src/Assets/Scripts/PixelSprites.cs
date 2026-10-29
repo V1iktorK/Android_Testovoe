@@ -55,9 +55,9 @@ namespace RoboLab
             return FromPixels(8, 12, (x, y) =>
             {
                 if (y == 11 && x > 2 && x < 5) return new Color(0.8f, 0.8f, 0.85f);
-                if (y > 1 && y < 10 && x > 0 && x < 7) return new Color(0.95f, 0.82f, 0.25f);
-                if (y > 3 && y < 7 && x > 1 && x < 6) return new Color(0.35f, 0.9f, 0.45f);
-                return new Color(0.75f, 0.65f, 0.2f);
+                if (y > 1 && y < 10 && x > 0 && x < 7) return new Color(0.20f, 0.95f, 0.45f);
+                if (y > 3 && y < 7 && x > 1 && x < 6) return new Color(0.95f, 1f, 0.97f);
+                return new Color(0.10f, 0.6f, 0.3f);
             });
         }
 

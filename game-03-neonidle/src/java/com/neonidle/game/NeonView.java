@@ -33,9 +33,9 @@ public final class NeonView extends View {
     private RectF tabRect2 = new RectF();
     private RectF prestigeRect = new RectF();
 
-    private final int bg = Color.rgb(10, 10, 26);
+    private final int bg = Color.rgb(8, 10, 12);
     private final int neon = Color.rgb(0, 255, 200);
-    private final int neon2 = Color.rgb(255, 60, 160);
+    private final int neon2 = Color.rgb(255, 170, 40);
     private final int dim = Color.rgb(70, 76, 110);
     private final int textLight = Color.rgb(220, 226, 255);
 

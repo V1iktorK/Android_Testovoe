@@ -20,9 +20,9 @@ import javax.imageio.ImageIO;
  */
 public final class ScreenshotGen {
 
-    private static final Color BG = new Color(10, 10, 26);
+    private static final Color BG = new Color(8, 10, 12);
     private static final Color NEON = new Color(0, 255, 200);
-    private static final Color NEON2 = new Color(255, 60, 160);
+    private static final Color NEON2 = new Color(255, 170, 40);
     private static final Color DIM = new Color(70, 76, 110);
     private static final Color TEXT = new Color(220, 226, 255);
 

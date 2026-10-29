@@ -28,10 +28,11 @@ namespace EnergyShield
         private TowerCatalog.Kind buildKind = TowerCatalog.Kind.Pylon;
         private Camera cam;
 
-        private static readonly Color FloorColor = new Color(0.16f, 0.17f, 0.2f);
-        private static readonly Color PathColor = new Color(0.28f, 0.26f, 0.22f);
-        private static readonly Color TowerColor = new Color(0.35f, 0.55f, 0.7f);
-        private static readonly Color EnemyColor = new Color(0.85f, 0.35f, 0.3f);
+        // Визуальная подпись: ТЕХНИЧЕСКИЙ ЧЕРТЁЖ — синий blueprint, белые линии, размерные акценты
+        private static readonly Color FloorColor = new Color(0.10f, 0.20f, 0.38f);
+        private static readonly Color PathColor = new Color(0.16f, 0.31f, 0.52f);
+        private static readonly Color TowerColor = new Color(0.80f, 0.92f, 1f);
+        private static readonly Color EnemyColor = new Color(1f, 0.58f, 0.28f);
 
         private void Awake()
         {
@@ -44,14 +45,28 @@ namespace EnergyShield
             }
             cam.orthographic = true;
             cam.orthographicSize = 7f;
-            cam.backgroundColor = new Color(0.1f, 0.11f, 0.13f);
+            cam.backgroundColor = new Color(0.07f, 0.14f, 0.28f);
             cam.clearFlags = CameraClearFlags.SolidColor;
             BuildScene();
         }
 
-        /// <summary>Промышленный цех: пол, коридор атаки, электростанция.</summary>
+        /// <summary>Промышленный цех как технический чертёж: белая сетка, размерные метки.</summary>
         private void BuildScene()
         {
+            // Сетка чертежа
+            for (int i = -9; i <= 9; i++)
+            {
+                var lineV = new GameObject("GridV" + i);
+                lineV.transform.position = new Vector3(i, 0, 2f);
+                lineV.transform.localScale = new Vector3(0.04f, 12f, 1f);
+                lineV.AddComponent<SpriteRenderer>().sprite = MakeSprite(new Color(0.55f, 0.72f, 0.92f, 1f));
+                lineV.GetComponent<SpriteRenderer>().sortingOrder = -5;
+                var lineH = new GameObject("GridH" + i);
+                lineH.transform.position = new Vector3(0, i, 2f);
+                lineH.transform.localScale = new Vector3(20f, 0.04f, 1f);
+                lineH.AddComponent<SpriteRenderer>().sprite = MakeSprite(new Color(0.55f, 0.72f, 0.92f, 1f));
+                lineH.GetComponent<SpriteRenderer>().sortingOrder = -5;
+            }
             var floor = new GameObject("Floor");
             floor.transform.position = new Vector3(0, 0, 1);
             floor.transform.localScale = new Vector3(20, 12, 1);

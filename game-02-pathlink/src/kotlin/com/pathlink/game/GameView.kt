@@ -28,12 +28,12 @@ class GameView(context: Context) : View(context) {
     private val progress: Progress = loadProgress()
 
     // --- Палитра (пастель) ---
-    private val bg = Color.rgb(247, 241, 232)
-    private val tileFill = Color.rgb(255, 248, 237)
-    private val pipeColor = Color.rgb(127, 181, 164)
-    private val pipeActive = Color.rgb(232, 168, 124)
-    private val textColor = Color.rgb(74, 68, 81)
-    private val lockedColor = Color.rgb(214, 205, 191)
+    private val bg = Color.rgb(238, 229, 206)
+    private val tileFill = Color.rgb(212, 202, 182)
+    private val pipeColor = Color.rgb(116, 150, 104)
+    private val pipeActive = Color.rgb(196, 120, 86)
+    private val textColor = Color.rgb(88, 70, 52)
+    private val lockedColor = Color.rgb(170, 158, 138)
     private val starColor = Color.rgb(240, 190, 90)
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)

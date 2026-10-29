@@ -100,6 +100,9 @@ public final class ScreenshotGen {
         g.setColor(new Color(51, 102, 229));
         g.fillOval(sx - 2, sy - 16, 32, 32);
 
+        // сканлайны ретро-ЭЛТ
+        g.setColor(new Color(0, 0, 0, 45));
+        for (int scanY = 0; scanY < h; scanY += 6) g.fillRect(0, scanY, w, 2);
         // HUD
         g.setColor(Color.WHITE);
         g.setFont(new Font("SansSerif", Font.BOLD, 64));

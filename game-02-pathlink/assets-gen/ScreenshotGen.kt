@@ -17,11 +17,11 @@ import javax.imageio.ImageIO
  */
 object ScreenshotGen {
 
-    private val bg = Color(247, 241, 232)
-    private val tileFill = Color(255, 248, 237)
-    private val pipe = Color(127, 181, 164)
-    private val accent = Color(232, 168, 124)
-    private val text = Color(74, 68, 81)
+    private val bg = Color(238, 229, 206)
+    private val tileFill = Color(212, 202, 182)
+    private val pipe = Color(116, 150, 104)
+    private val accent = Color(196, 120, 86)
+    private val text = Color(88, 70, 52)
     private val star = Color(240, 190, 90)
 
     @JvmStatic

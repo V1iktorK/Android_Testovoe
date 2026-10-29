@@ -7,11 +7,11 @@ const Siege := preload("res://logic/siege_logic.gd")
 enum State { MENU, MAP_SELECT, DEPLOY, BATTLE, RESULT }
 
 const COLORS := {
-	"path": Color(0.28, 0.22, 0.16),
-	"grass": Color(0.10, 0.13, 0.10),
-	"tower": Color(0.20, 0.14, 0.28),
-	"fortress": Color(0.35, 0.12, 0.12),
-	"camp": Color(0.16, 0.28, 0.18),
+	"path": Color(0.78, 0.68, 0.5),
+	"grass": Color(0.72, 0.62, 0.44),
+	"tower": Color(0.32, 0.24, 0.16),
+	"fortress": Color(0.62, 0.16, 0.12),
+	"camp": Color(0.42, 0.33, 0.22),
 	"warrior": Color(0.85, 0.65, 0.35),
 	"catapult": Color(0.6, 0.45, 0.3),
 	"wyvern": Color(0.65, 0.3, 0.75),
@@ -158,9 +158,9 @@ func _draw() -> void:
 	var font := ThemeDB.fallback_font
 	match state:
 		State.MENU:
-			draw_string(font, Vector2(size.x / 2, size.y * 0.35), "ТЁМНАЯ ОСАДА", HORIZONTAL_ALIGNMENT_CENTER, -1, 88, Color(0.9, 0.35, 0.3))
-			draw_string(font, Vector2(size.x / 2, size.y * 0.46), "ты — атакующая сторона: штурмуй крепость тьмы", HORIZONTAL_ALIGNMENT_CENTER, -1, 34, Color(0.8, 0.75, 0.7))
-			draw_string(font, Vector2(size.x / 2, size.y * 0.58), "тап — выбрать уровень", HORIZONTAL_ALIGNMENT_CENTER, -1, 36, Color(1, 0.75, 0.4))
+			draw_string(font, Vector2(size.x / 2, size.y * 0.35), "ТЁМНАЯ ОСАДА", HORIZONTAL_ALIGNMENT_CENTER, -1, 88, Color(0.55, 0.14, 0.1))
+			draw_string(font, Vector2(size.x / 2, size.y * 0.46), "ты — атакующая сторона: штурмуй крепость тьмы", HORIZONTAL_ALIGNMENT_CENTER, -1, 34, Color(0.35, 0.26, 0.18))
+			draw_string(font, Vector2(size.x / 2, size.y * 0.58), "тап — выбрать уровень", HORIZONTAL_ALIGNMENT_CENTER, -1, 36, Color(0.62, 0.16, 0.12))
 		State.MAP_SELECT:
 			draw_string(font, Vector2(size.x / 2, size.y * 0.08), "Выбор уровня", HORIZONTAL_ALIGNMENT_CENTER, -1, 60, Color.WHITE)
 			for i in range(1, 21):
@@ -212,7 +212,7 @@ func draw_map(size: Vector2, font: Font) -> void:
 			var x := size.x * 0.02 + i * size.x * 0.25
 			draw_rect(Rect2(x, size.y * 0.84, size.x * 0.23, size.y * 0.12), Color(0.16, 0.12, 0.2))
 			draw_string(font, Vector2(x + 12, size.y * 0.88), "%s  x%d" % [names[i], army[units[i]]], HORIZONTAL_ALIGNMENT_LEFT, -1, 30, COLORS[units[i]])
-			draw_string(font, Vector2(x + 12, size.y * 0.93), "%d зол. · ур. %d" % [Siege.UNITS[units[i]]["cost"], upgrade_levels[units[i]]], HORIZONTAL_ALIGNMENT_LEFT, -1, 24, Color(0.8, 0.75, 0.7))
+			draw_string(font, Vector2(x + 12, size.y * 0.93), "%d зол. · ур. %d" % [Siege.UNITS[units[i]]["cost"], upgrade_levels[units[i]]], HORIZONTAL_ALIGNMENT_LEFT, -1, 24, Color(0.35, 0.26, 0.18))
 		draw_rect(Rect2(size.x * 0.77, size.y * 0.84, size.x * 0.21, size.y * 0.12), Color(0.6, 0.2, 0.15))
 		draw_string(font, Vector2(size.x * 0.79, size.y * 0.92), "В АТАКУ!", HORIZONTAL_ALIGNMENT_LEFT, -1, 36, Color.WHITE)
 		draw_string(font, Vector2(size.x * 0.02, size.y * 0.02), "улучшения: тап вверху по колонке юнита", HORIZONTAL_ALIGNMENT_LEFT, -1, 22, Color(0.65, 0.6, 0.6))

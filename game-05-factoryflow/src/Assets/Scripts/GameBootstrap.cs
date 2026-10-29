@@ -64,7 +64,7 @@ namespace FactoryFlow
                 lamp.name = "Lamp" + i;
                 lamp.transform.position = station.transform.position + new Vector3(0f, 1.1f, 0f);
                 lamp.transform.localScale = Vector3.one * 0.35f;
-                lamp.GetComponent<Renderer>().material.color = HotColor;
+                lamp.GetComponent<Renderer>().material.color = new Color(0.4f, 0.95f, 1f, 0.85f);
             }
 
             // Свет и камера (вид сверху-сбоку — как в VR-тренажёре)

@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
  */
 public final class ScreenshotGen {
 
-    private static final Color SPACE = new Color(13, 13, 31);
+    private static final Color SPACE = new Color(33, 26, 71);
     private static final Color WELL = new Color(38, 26, 77);
     private static final Color STAR = new Color(255, 217, 77);
     private static final Color GOAL = new Color(51, 230, 178);
@@ -47,7 +47,7 @@ public final class ScreenshotGen {
         for (int i = 0; i < 6; i++) {
             int cx = rng.nextInt(w), cy = (int) (h * 0.12) + rng.nextInt((int) (h * 0.72));
             int r = (int) (w * (0.22 + rng.nextDouble() * 0.3));
-            Color tint = i % 2 == 0 ? new Color(89, 31, 128, 90) : new Color(26, 77, 140, 80);
+            Color tint = i % 2 == 0 ? new Color(217, 140, 166, 80) : new Color(128, 166, 217, 80);
             g.setPaint(new RadialGradientPaint(new Ellipse2D.Double(cx - r, cy - r, 2 * r, 2 * r).getBounds2D(),
                     new float[]{0f, 1f}, new Color[]{tint, new Color(0, 0, 0, 0)},
                     MultipleGradientPaint.CycleMethod.NO_CYCLE));

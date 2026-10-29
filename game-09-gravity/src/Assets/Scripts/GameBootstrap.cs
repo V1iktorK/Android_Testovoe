@@ -26,9 +26,9 @@ namespace GravityDrift
         private Camera cam;
 
         // Палитра туманности
-        private static readonly Color SpaceBg = new Color(0.05f, 0.05f, 0.12f);
-        private static readonly Color NebulaA = new Color(0.35f, 0.12f, 0.5f, 0.35f);
-        private static readonly Color NebulaB = new Color(0.1f, 0.3f, 0.55f, 0.3f);
+        private static readonly Color SpaceBg = new Color(0.13f, 0.10f, 0.28f);
+        private static readonly Color NebulaA = new Color(0.85f, 0.55f, 0.65f, 0.28f);
+        private static readonly Color NebulaB = new Color(0.5f, 0.65f, 0.85f, 0.26f);
 
         private void Awake()
         {
@@ -61,7 +61,7 @@ namespace GravityDrift
                 var nebula = new GameObject("Nebula" + i);
                 nebula.transform.position = new Vector3(Random.Range(-9f, 9f), Random.Range(-7f, 7f), 5f);
                 var sr = nebula.AddComponent<SpriteRenderer>();
-                sr.sprite = MakeCircleSprite(Random.Range(2.5f, 6f));
+                sr.sprite = MakeCircleSprite(Random.Range(4f, 8f));
                 sr.color = i % 2 == 0 ? NebulaA : NebulaB;
                 sr.sortingOrder = -10;
             }

@@ -14,7 +14,7 @@ import kotlin.math.min
 
 /**
  * «Мультяшный раннер» — свайпы: влево/вправо — смена полосы, вверх — прыжок, вниз — кувырок.
- * Яркий мультяшный стиль: градиент неба, холмы, облака, цветные препятствия.
+ * Визуальная подпись: ПАПЕРКРАФТ — слои «вырезанной» бумаги с мягкими тенями.
  */
 class RunnerView(context: Context) : View(context) {
 
@@ -38,13 +38,13 @@ class RunnerView(context: Context) : View(context) {
     private var swiped = false
 
     // --- Палитра (мультяшная) ---
-    private val skyTop = Color.rgb(116, 192, 252)
-    private val skyBottom = Color.rgb(201, 240, 255)
-    private val hillFar = Color.rgb(120, 200, 130)
-    private val hillNear = Color.rgb(86, 175, 105)
-    private val road = Color.rgb(238, 226, 200)
-    private val textColor = Color.rgb(45, 60, 85)
-    private val heroColors = intArrayOf(Color.rgb(255, 122, 89), Color.rgb(96, 176, 255), Color.rgb(178, 102, 255))
+    private val skyTop = Color.rgb(244, 231, 208)
+    private val skyBottom = Color.rgb(228, 208, 182)
+    private val hillFar = Color.rgb(176, 200, 142)
+    private val hillNear = Color.rgb(132, 172, 108)
+    private val road = Color.rgb(250, 243, 226)
+    private val textColor = Color.rgb(92, 66, 50)
+    private val heroColors = intArrayOf(Color.rgb(226, 118, 88), Color.rgb(102, 148, 208), Color.rgb(158, 108, 190))
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val buttons = mutableMapOf<String, RectF>()
 
@@ -172,10 +172,15 @@ class RunnerView(context: Context) : View(context) {
             canvas.drawCircle(cx, h * (0.12f + i * 0.07f), w * 0.09f, paint)
             canvas.drawCircle(cx + w * 0.08f, h * (0.12f + i * 0.07f), w * 0.07f, paint)
         }
-        // холмы
+        // холмы-вырезки: тени под слоями бумаги
+        paint.color = Color.argb(40, 90, 66, 50)
+        canvas.drawCircle(w * 0.22f, h * 0.635f, w * 0.35f, paint)
+        canvas.drawCircle(w * 0.87f, h * 0.635f, w * 0.3f, paint)
         paint.color = hillFar
         canvas.drawCircle(w * 0.2f, h * 0.62f, w * 0.35f, paint)
         canvas.drawCircle(w * 0.85f, h * 0.62f, w * 0.3f, paint)
+        paint.color = Color.argb(40, 90, 66, 50)
+        canvas.drawCircle(w * 0.52f, h * 0.695f, w * 0.42f, paint)
         paint.color = hillNear
         canvas.drawCircle(w * 0.5f, h * 0.68f, w * 0.42f, paint)
         // дорога

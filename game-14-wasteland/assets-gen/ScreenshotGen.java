@@ -66,6 +66,9 @@ public final class ScreenshotGen {
         drawBar(g, (int) (w * 0.36), (int) (w * 0.11), (int) (w * 0.28), 0.55f, ACCENT, "ГОЛОД");
         drawBar(g, (int) (w * 0.68), (int) (w * 0.11), (int) (w * 0.28), 0.7f, new Color(120, 170, 230), "ТЕПЛО");
 
+        g.setColor(new Color(110, 220, 110));
+        g.setFont(new Font("SansSerif", Font.PLAIN, (int) (w * 0.026)));
+        g.drawString("радиационный фон: 21 мкР/ч", (int) (w * 0.04), (int) (h * 0.235));
         // событие
         g.setColor(new Color(40, 36, 30, 220));
         g.fill(new RoundRectangle2D.Double(w * 0.06, h * 0.17, w * 0.88, h * 0.065, 18, 18));

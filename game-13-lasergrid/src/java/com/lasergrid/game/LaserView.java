@@ -49,6 +49,9 @@ public final class LaserView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(bg);
+        // люминофор осциллографа: горизонтальные строки развёртки
+        paint.setColor(Color.argb(30, 0, 0, 0));
+        for (int sy = 0; sy < getHeight(); sy += 6) canvas.drawRect(0, sy, getWidth(), sy + 2, paint);
         buttons.clear();
         switch (state) {
             case Menu:

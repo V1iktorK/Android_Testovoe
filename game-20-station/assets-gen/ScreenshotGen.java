@@ -16,13 +16,13 @@ import javax.imageio.ImageIO;
  */
 public final class ScreenshotGen {
 
-    private static final Color BG = new Color(18, 20, 33);
-    private static final Color ROOM = new Color(33, 38, 56);
+    private static final Color BG = new Color(4, 8, 12);
+    private static final Color ROOM = new Color(13, 31, 41);
     private static final Color[] KIND_COLORS = {
-            new Color(217, 76, 76), new Color(242, 204, 76), new Color(102, 191, 229),
+            new Color(64, 255, 255), new Color(242, 204, 76), new Color(64, 255, 255),
             new Color(140, 217, 140), new Color(191, 64, 217), new Color(153, 166, 191)
     };
-    private static final Color TEXT = new Color(220, 228, 245);
+    private static final Color TEXT = new Color(64, 255, 255);
 
     public static void main(String[] args) throws Exception {
         File out = new File(args.length > 0 ? args[0] : "screenshot.png");

@@ -137,6 +137,9 @@ func _draw() -> void:
 	if flash > 0.0:
 		draw_rect(Rect2(0, 0, 1280, 720), Color(1, 0.3, 0.3, flash * 0.5))
 
+	# Сканлайны ретро-ЭЛТ
+	for sy in range(0, 720, 6):
+		draw_rect(Rect2(0, sy, 1280, 2), Color(0, 0, 0, 0.18))
 	# HUD
 	var font := ThemeDB.fallback_font
 	var score := RunnerLogic.score_for(distance)

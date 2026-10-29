@@ -79,6 +79,9 @@ public final class ScreenshotGen {
         g.setColor(BEAM);
         g.fillOval(left + cell + cell / 3, top + 4 * cell + cell / 3, cell / 3, cell / 3);
 
+        // развёртка осциллографа
+        g.setColor(new Color(0, 0, 0, 75));
+        for (int sy = 0; sy < h; sy += 6) g.fillRect(0, sy, w, 2);
         // HUD
         g.setFont(new Font("SansSerif", Font.BOLD, (int) (w * 0.05)));
         g.drawString("Уровень 12", (int) (w * 0.04), (int) (w * 0.10));

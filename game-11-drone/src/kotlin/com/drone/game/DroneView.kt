@@ -251,6 +251,19 @@ class DroneView(context: Context) : View(context) {
     }
 
     private fun drawHud(canvas: Canvas) {
+        // уголки телеметрии дрона
+        paint.color = neonCyan
+        paint.strokeWidth = 8f
+        val m = 30f
+        val len = 90f
+        canvas.drawLine(m, m, m + len, m, paint)
+        canvas.drawLine(m, m, m, m + len, paint)
+        canvas.drawLine(width - m, m, width - m - len, m, paint)
+        canvas.drawLine(width - m, m, width - m, m + len, paint)
+        canvas.drawLine(m, height - m, m + len, height - m, paint)
+        canvas.drawLine(m, height - m, m, height - m - len, paint)
+        canvas.drawLine(width - m, height - m, width - m - len, height - m, paint)
+        canvas.drawLine(width - m, height - m, width - m, height - m - len, paint)
         val w = width.toFloat()
         paint.textAlign = Paint.Align.LEFT
         paint.color = textLight

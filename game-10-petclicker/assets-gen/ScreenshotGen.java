@@ -19,13 +19,13 @@ import javax.imageio.ImageIO;
  */
 public final class ScreenshotGen {
 
-    private static final Color BG = new Color(255, 243, 224);
-    private static final Color BODY = new Color(255, 214, 170);
-    private static final Color BODY_DARK = new Color(255, 196, 150);
-    private static final Color HEAD = new Color(255, 222, 183);
-    private static final Color TEXT = new Color(94, 66, 52);
-    private static final Color ACCENT = new Color(255, 159, 125);
-    private static final Color MINT = new Color(164, 221, 192);
+    private static final Color BG = new Color(214, 242, 236);
+    private static final Color BODY = new Color(255, 183, 120);
+    private static final Color BODY_DARK = new Color(240, 150, 90);
+    private static final Color HEAD = new Color(255, 206, 150);
+    private static final Color TEXT = new Color(72, 42, 92);
+    private static final Color ACCENT = new Color(255, 105, 180);
+    private static final Color MINT = new Color(126, 214, 194);
     private static final Color CARD = new Color(255, 255, 255);
 
     public static void main(String[] args) throws Exception {

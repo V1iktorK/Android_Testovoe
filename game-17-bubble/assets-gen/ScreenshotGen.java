@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
@@ -43,6 +44,18 @@ public final class ScreenshotGen {
         g.setPaint(new GradientPaint(0, 0, MID, 0, h, DEEP));
         g.fillRect(0, 0, w, h);
 
+        // каустика
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.12f));
+        g.setColor(new Color(180, 230, 255));
+        for (int i = 0; i < 5; i++) {
+            Polygon ray = new Polygon();
+            ray.addPoint((int) (w * (0.1 + i * 0.22)), 0);
+            ray.addPoint((int) (w * (0.2 + i * 0.22)), 0);
+            ray.addPoint((int) (w * (0.05 + i * 0.22)), h);
+            ray.addPoint((int) (w * (-0.02 + i * 0.22)), h);
+            g.fill(ray);
+        }
+        g.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 1f));
         // световые столбы
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.12f));
         g.setColor(new Color(120, 200, 255));

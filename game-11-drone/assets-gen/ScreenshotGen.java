@@ -82,6 +82,13 @@ public final class ScreenshotGen {
         g.setColor(PINK);
         g.fillOval(dx - 22, dy - 22, 44, 44);
 
+        // уголки телеметрии
+        g.setColor(CYAN);
+        g.setStroke(new BasicStroke(8f));
+        g.drawLine(30, 30, 120, 30); g.drawLine(30, 30, 30, 120);
+        g.drawLine(w - 30, 30, w - 120, 30); g.drawLine(w - 30, 30, w - 30, 120);
+        g.drawLine(30, h - 30, 120, h - 30); g.drawLine(30, h - 30, 30, h - 120);
+        g.drawLine(w - 30, h - 30, w - 120, h - 30); g.drawLine(w - 30, h - 30, w - 30, h - 120);
         // HUD
         g.setColor(TEXT);
         g.setFont(new Font("SansSerif", Font.BOLD, (int) (w * 0.048)));

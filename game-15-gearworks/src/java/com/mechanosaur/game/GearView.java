@@ -63,6 +63,11 @@ public final class GearView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(bg);
+        // патентный чертёж: мелкая штриховка поля
+        paint.setColor(Color.rgb(58, 45, 35));
+        paint.setStrokeWidth(2f);
+        for (int gx = 0; gx < getWidth(); gx += 42) canvas.drawLine(gx, 0, gx, getHeight(), paint);
+        for (int gy = 0; gy < getHeight(); gy += 42) canvas.drawLine(0, gy, getWidth(), gy, paint);
         buttons.clear();
         switch (state) {
             case Menu:

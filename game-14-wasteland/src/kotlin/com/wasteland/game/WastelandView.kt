@@ -126,6 +126,11 @@ class WastelandView(context: Context) : View(context) {
     }
 
     private fun drawPlay(canvas: Canvas) {
+        // сигнатура: зелёная шкала радиационного фона
+        paint.color = Color.rgb(110, 220, 110)
+        paint.textAlign = Paint.Align.LEFT
+        paint.textSize = width * 0.026f
+        canvas.drawText("радиационный фон: ${day * 3} мкР/ч", width * 0.04f, height * 0.235f, paint)
         val w = width.toFloat()
         val h = height.toFloat()
         paint.color = textLight

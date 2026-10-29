@@ -72,6 +72,17 @@ public final class BubbleView extends View {
     private void drawBackground(Canvas canvas) {
         float w = getWidth();
         float h = getHeight();
+        // каустика: диагональные лучи поверхности
+        paint.setColor(Color.argb(30, 180, 230, 255));
+        for (int i = 0; i < 5; i++) {
+            android.graphics.Path ray = new android.graphics.Path();
+            ray.moveTo(w * (0.1f + i * 0.22f), 0);
+            ray.lineTo(w * (0.2f + i * 0.22f), 0);
+            ray.lineTo(w * (0.05f + i * 0.22f), h);
+            ray.lineTo(w * (-0.02f + i * 0.22f), h);
+            ray.close();
+            canvas.drawPath(ray, paint);
+        }
         // световые столбы
         paint.setColor(Color.argb(26, 120, 200, 255));
         canvas.drawOval(new RectF(w * 0.1f, -h * 0.2f, w * 0.5f, h * 0.7f), paint);

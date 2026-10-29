@@ -17,13 +17,13 @@ import javax.imageio.ImageIO;
  */
 public final class ScreenshotGen {
 
-    private static final Color SKY_TOP = new Color(116, 192, 252);
-    private static final Color SKY_BOTTOM = new Color(201, 240, 255);
-    private static final Color HILL_FAR = new Color(120, 200, 130);
-    private static final Color HILL_NEAR = new Color(86, 175, 105);
-    private static final Color ROAD = new Color(238, 226, 200);
-    private static final Color TEXT = new Color(45, 60, 85);
-    private static final Color HERO = new Color(255, 122, 89);
+    private static final Color SKY_TOP = new Color(244, 231, 208);
+    private static final Color SKY_BOTTOM = new Color(228, 208, 182);
+    private static final Color HILL_FAR = new Color(176, 200, 142);
+    private static final Color HILL_NEAR = new Color(132, 172, 108);
+    private static final Color ROAD = new Color(250, 243, 226);
+    private static final Color TEXT = new Color(92, 66, 50);
+    private static final Color HERO = new Color(226, 118, 88);
     private static final Color SKIN = new Color(255, 226, 190);
     private static final Color COIN = new Color(255, 206, 68);
 
@@ -53,6 +53,9 @@ public final class ScreenshotGen {
         }
 
         // Холмы
+        g.setColor(new Color(90, 66, 50, 55));
+        g.fillOval((int) (-w * 0.13), (int) (h * 0.435), (int) (w * 0.7), (int) (h * 0.3));
+        g.fillOval((int) (w * 0.62), (int) (h * 0.455), (int) (w * 0.6), (int) (h * 0.28));
         g.setColor(HILL_FAR);
         g.fillOval((int) (-w * 0.15), (int) (h * 0.42), (int) (w * 0.7), (int) (h * 0.3));
         g.fillOval((int) (w * 0.6), (int) (h * 0.44), (int) (w * 0.6), (int) (h * 0.28));

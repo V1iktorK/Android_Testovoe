@@ -14,19 +14,20 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 /**
- * Офлайн-генерация screenshot.png и иконки «Тени-Клинка» (ниндзя, пиксель-арт, ночь).
+ * Офлайн-генерация screenshot.png и иконки «Тени-Клинка».
+ * Визуальная подпись: СИЛУЭТЫ НА ЗАКАТЕ — чёрные фигуры на охристом градиенте, алый акцент.
+ * (Осознанно отличается от пиксель-арта игры 01.)
  * Запуск: java ninja.gen.ScreenshotGen <screenshot.png> <ширина> <высота>
  */
 public final class ScreenshotGen {
 
-    private static final Color NIGHT = new Color(23, 26, 46);
-    private static final Color NIGHT_BOTTOM = new Color(36, 42, 74);
-    private static final Color TILE = new Color(56, 64, 97);
-    private static final Color TILE_DARK = new Color(30, 35, 58);
-    private static final Color NINJA = new Color(38, 38, 51);
-    private static final Color NINJA_SCARF = new Color(217, 68, 74);
-    private static final Color STAR = new Color(255, 217, 77);
-    private static final Color TEXT = new Color(232, 238, 255);
+    private static final Color SKY_TOP = new Color(250, 184, 107);
+    private static final Color SKY_BOTTOM = new Color(235, 97, 71);
+    private static final Color INK = new Color(20, 15, 26);
+    private static final Color SUN = new Color(255, 220, 140);
+    private static final Color STAR = new Color(255, 235, 166);
+    private static final Color SCARF = new Color(217, 46, 41);
+    private static final Color TEXT = new Color(48, 28, 32);
 
     public static void main(String[] args) throws Exception {
         File out = new File(args.length > 0 ? args[0] : "screenshot.png");
@@ -41,39 +42,58 @@ public final class ScreenshotGen {
         BufferedImage img = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = img.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setPaint(new GradientPaint(0, 0, NIGHT, 0, h * 0.7f, NIGHT_BOTTOM));
+        g.setPaint(new GradientPaint(0, 0, SKY_TOP, 0, h, SKY_BOTTOM));
         g.fillRect(0, 0, w, h);
 
-        // Луна
-        g.setColor(new Color(230, 235, 255));
-        g.fill(new Ellipse2D.Double(w * 0.68, h * 0.12, w * 0.22, w * 0.22));
-        g.setColor(new Color(196, 205, 240));
-        g.fill(new Ellipse2D.Double(w * 0.72, h * 0.14, w * 0.05, w * 0.05));
+        // Солнце-диск с полосами
+        int sunC = (int) (w * 0.52), sunY = (int) (h * 0.52), sunR = (int) (w * 0.36);
+        g.setColor(SUN);
+        g.fill(new Ellipse2D.Double(sunC - sunR, sunY - sunR, sunR * 2, sunR * 2));
+        g.setColor(SKY_BOTTOM);
+        for (int i = 0; i < 5; i++) {
+            g.fillRect(sunC - sunR, sunY + 20 + i * 70, sunR * 2, 26);
+        }
 
-        // Платформы (пиксельные блоки)
-        drawPlatform(g, (int) (w * 0.05), (int) (h * 0.72), (int) (w * 0.4), 60);
-        drawPlatform(g, (int) (w * 0.52), (int) (h * 0.62), (int) (w * 0.22), 60);
-        drawPlatform(g, (int) (w * 0.8), (int) (h * 0.52), (int) (w * 0.18), 60);
-        drawPlatform(g, (int) (w * 0.3), (int) (h * 0.42), (int) (w * 0.18), 50);
+        // Силуэты сопок
+        g.setColor(INK);
+        int[] hx = {0, 180, 380, 620, 860};
+        int[] hh = {200, 320, 240, 380, 260};
+        for (int i = 0; i < hx.length; i++) {
+            Polygon p = new Polygon();
+            p.addPoint(hx[i] - 60, (int) (h * 0.78));
+            p.addPoint(hx[i] + 110, (int) (h * 0.78) - hh[i]);
+            p.addPoint(hx[i] + 290, (int) (h * 0.78));
+            g.fillPolygon(p);
+        }
 
-        // Ниндзя
-        int nx = (int) (w * 0.22), ny = (int) (h * 0.68);
-        g.setColor(NINJA);
-        g.fill(new Rectangle2D.Double(nx, ny - 90, 70, 90));
-        g.fill(new Ellipse2D.Double(nx + 4, ny - 130, 62, 62));
-        g.setColor(NINJA_SCARF);
-        g.fill(new Rectangle2D.Double(nx - 26, ny - 100, 40, 16));
-        g.setColor(Color.WHITE);
-        g.fill(new Rectangle2D.Double(nx + 18, ny - 108, 12, 8));
-        g.fill(new Rectangle2D.Double(nx + 42, ny - 108, 12, 8));
+        // Платформы-силуэты
+        g.setColor(INK);
+        g.fill(new Rectangle2D.Double(w * 0.05, h * 0.72, w * 0.38, 26));
+        g.fill(new Rectangle2D.Double(w * 0.52, h * 0.62, w * 0.2, 26));
+        g.fill(new Rectangle2D.Double(w * 0.8, h * 0.52, w * 0.18, 26));
+        g.fill(new Rectangle2D.Double(w * 0.3, h * 0.42, w * 0.18, 24));
+
+        // Ниндзя-силуэт с алой повязкой
+        int nx = (int) (w * 0.2), ny = (int) (h * 0.72);
+        g.setColor(INK);
+        g.fill(new Rectangle2D.Double(nx, ny - 92, 66, 92));
+        g.fill(new Ellipse2D.Double(nx + 2, ny - 132, 62, 62));
+        g.setColor(SCARF);
+        g.fill(new Rectangle2D.Double(nx - 30, ny - 104, 42, 14));
 
         // Звёзды
         for (int i = 0; i < 3; i++) {
-            int sx = (int) (w * (0.42 + i * 0.14));
-            int sy = (int) (h * (0.36 + (i % 2) * 0.08));
+            int sx = (int) (w * (0.44 + i * 0.13));
+            int sy = (int) (h * (0.36 + (i % 2) * 0.07));
             g.setColor(STAR);
-            drawStar(g, sx, sy, 32);
+            drawStar(g, sx, sy, 30);
         }
+
+        // Алые врата-финиш
+        g.setColor(SCARF);
+        g.fill(new Rectangle2D.Double(w * 0.86, h * 0.47, 22, h * 0.06));
+        g.fill(new Rectangle2D.Double(w * 0.92, h * 0.47, 22, h * 0.06));
+        g.fill(new Rectangle2D.Double(w * 0.86, h * 0.455, w * 0.08, 16));
 
         // HUD
         g.setColor(TEXT);
@@ -82,20 +102,13 @@ public final class ScreenshotGen {
         g.setFont(new Font("SansSerif", Font.PLAIN, (int) (w * 0.038)));
         g.drawString("звёзды: 4   сюрикены: 3", (int) (w * 0.04), (int) (w * 0.135));
 
-        g.setColor(new Color(217, 68, 74));
+        g.setColor(SCARF);
         g.setFont(new Font("SansSerif", Font.BOLD, (int) (w * 0.045)));
-        String cap = "двойной прыжок · лазание по стенам · сюрикены";
+        String cap = "силуэты на закате · двойной прыжок · сюрикены";
         g.drawString(cap, (w - g.getFontMetrics().stringWidth(cap)) / 2, (int) (h * 0.9));
 
         g.dispose();
         ImageIO.write(img, "png", out);
-    }
-
-    private static void drawPlatform(Graphics2D g, int x, int y, int width, int height) {
-        g.setColor(TILE);
-        g.fill(new Rectangle2D.Double(x, y, width, height));
-        g.setColor(TILE_DARK);
-        g.fill(new Rectangle2D.Double(x, y + height - 14, width, 14));
     }
 
     private static void drawStar(Graphics2D g, int cx, int cy, int r) {
@@ -113,16 +126,15 @@ public final class ScreenshotGen {
         BufferedImage img = new BufferedImage(s, s, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = img.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setColor(NIGHT);
+        g.setPaint(new GradientPaint(0, 0, SKY_TOP, 0, s, SKY_BOTTOM));
         g.fillRoundRect(0, 0, s, s, 30, 30);
-        g.setColor(NINJA);
-        g.fill(new Ellipse2D.Double(60, 40, 72, 72));
-        g.fill(new Rectangle2D.Double(56, 100, 80, 62));
-        g.setColor(NINJA_SCARF);
-        g.fill(new Rectangle2D.Double(40, 92, 44, 16));
-        g.setColor(Color.WHITE);
-        g.fill(new Rectangle2D.Double(76, 68, 14, 10));
-        g.fill(new Rectangle2D.Double(104, 68, 14, 10));
+        g.setColor(SUN);
+        g.fillOval(56, 26, 80, 80);
+        g.setColor(INK);
+        g.fill(new Ellipse2D.Double(64, 52, 64, 64));
+        g.fill(new Rectangle2D.Double(58, 106, 76, 58));
+        g.setColor(SCARF);
+        g.fill(new Rectangle2D.Double(42, 96, 44, 14));
         g.dispose();
         out.getParentFile().mkdirs();
         ImageIO.write(img, "png", out);

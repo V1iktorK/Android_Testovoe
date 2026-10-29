@@ -29,12 +29,12 @@ public final class FarmView extends View {
     private long lastTick;
 
     // Уютная палитра
-    private final int sky = Color.rgb(255, 236, 214);
-    private final int soil = Color.rgb(166, 124, 82);
-    private final int grass = Color.rgb(154, 205, 130);
+    private final int sky = Color.rgb(250, 246, 233);
+    private final int soil = Color.rgb(150, 122, 96);
+    private final int grass = Color.rgb(216, 226, 188);
     private final int panel = Color.rgb(255, 250, 240);
     private final int textBrown = Color.rgb(104, 72, 52);
-    private final int accent = Color.rgb(238, 150, 98);
+    private final int accent = Color.rgb(240, 160, 90);
 
     public FarmView(Context context) {
         super(context);
@@ -50,6 +50,7 @@ public final class FarmView extends View {
         for (FarmPlot p : plots) p.tick(dt);
 
         canvas.drawColor(sky);
+        drawNotebookGrid(canvas);
         drawBackground(canvas);
         buttons.clear();
         switch (state) {
@@ -61,13 +62,28 @@ public final class FarmView extends View {
         postInvalidateDelayed(120);
     }
 
+    /** Клетчатая бумага скетчбука — визуальная подпись игры. */
+    private void drawNotebookGrid(Canvas canvas) {
+        float w = getWidth();
+        float h = getHeight();
+        paint.setColor(Color.rgb(205, 215, 228));
+        paint.setStrokeWidth(2f);
+        float step = w * 0.08f;
+        for (float x = 0; x < w; x += step) canvas.drawLine(x, 0, x, h, paint);
+        for (float y = 0; y < h; y += step) canvas.drawLine(0, y, w, y, paint);
+        // поля и «скотч»
+        paint.setColor(Color.rgb(238, 190, 190));
+        paint.setStrokeWidth(5f);
+        canvas.drawLine(w * 0.1f, 0, w * 0.1f, h, paint);
+    }
+
     private void drawBackground(Canvas canvas) {
         float w = getWidth();
         float h = getHeight();
         paint.setColor(grass);
         canvas.drawRect(0, h * 0.55f, w, h, paint);
         // цветочки
-        paint.setColor(Color.rgb(255, 180, 190));
+        paint.setColor(Color.rgb(238, 190, 190));
         for (int i = 0; i < 6; i++) {
             canvas.drawCircle(w * (0.08f + i * 0.17f), h * 0.62f, w * 0.018f, paint);
             canvas.drawCircle(w * (0.12f + i * 0.17f), h * 0.66f, w * 0.015f, paint);

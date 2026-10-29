@@ -23,9 +23,13 @@ namespace ShadowBlade
         private float distance;
         private Camera cam;
 
-        private static readonly Color NightBg = new Color(0.09f, 0.10f, 0.18f);
-        private static readonly Color TileColor = new Color(0.22f, 0.25f, 0.38f);
-        private static readonly Color StarColor = new Color(1f, 0.85f, 0.3f);
+        // Силуэтный стиль: тёплый закат, чёрные силуэты, алый акцент
+        private static readonly Color SkyTop = new Color(0.98f, 0.72f, 0.42f);
+        private static readonly Color SkyBottom = new Color(0.92f, 0.38f, 0.28f);
+        private static readonly Color TileColor = new Color(0.08f, 0.06f, 0.10f);
+        private static readonly Color StarColor = new Color(1f, 0.92f, 0.65f);
+        private static readonly Color SunColor = new Color(1f, 0.86f, 0.55f);
+        private static readonly Color ScarfColor = new Color(0.85f, 0.18f, 0.16f);
 
         private void Awake()
         {
@@ -39,8 +43,38 @@ namespace ShadowBlade
             }
             cam.orthographic = true;
             cam.orthographicSize = 6f;
-            cam.backgroundColor = NightBg;
+            cam.backgroundColor = SkyTop;
             cam.clearFlags = CameraClearFlags.SolidColor;
+            BuildBackdrop();
+        }
+
+        /// <summary>Закатный фон: полосы градиента, солнце, силуэты сопок.</summary>
+        private void BuildBackdrop()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                var band = new GameObject("Sky" + i);
+                band.transform.position = new Vector3(0f, 4.2f - i * 1.6f, 5f);
+                band.transform.localScale = new Vector3(42f, 1.7f, 1f);
+                var sr = band.AddComponent<SpriteRenderer>();
+                sr.sprite = MakeSprite(Color.Lerp(SkyTop, SkyBottom, i / 5f));
+                sr.sortingOrder = -20;
+            }
+            var sun = new GameObject("Sun");
+            sun.transform.position = new Vector3(2.2f, 1.2f, 4f);
+            sun.transform.localScale = Vector3.one * 4.6f;
+            var sunSr = sun.AddComponent<SpriteRenderer>();
+            sunSr.sprite = MakeSprite(SunColor);
+            sunSr.sortingOrder = -18;
+            for (int i = 0; i < 5; i++)
+            {
+                var hill = new GameObject("Hills" + i);
+                hill.transform.position = new Vector3(-6f + i * 3.2f, -2.2f + (i % 2) * 0.9f, 3f);
+                hill.transform.localScale = new Vector3(4.4f, 2.6f + (i % 3), 1f);
+                var hillSr = hill.AddComponent<SpriteRenderer>();
+                hillSr.sprite = MakeSprite(TileColor);
+                hillSr.sortingOrder = -15;
+            }
         }
 
         private void StartLevel(int levelNumber)
@@ -64,10 +98,10 @@ namespace ShadowBlade
                 star.AddComponent<StarPickup>();
                 starX += 6f;
             }
-            // Финишная черепица
-            SpawnSprite("Goal", new Color(0.3f, 0.9f, 0.7f), x - 1f, 1.5f, 0.6f);
+            // Финиш: алые врата — контрастный акцент силуэтного стиля
+            SpawnSprite("Goal", ScarfColor, x - 1f, 1.5f, 0.6f);
 
-            player = SpawnSprite("Ninja", new Color(0.15f, 0.15f, 0.2f), 1.5f, 1.2f, 0.55f);
+            player = SpawnSprite("Ninja", TileColor, 1.5f, 1.2f, 0.55f);
             var body = player.AddComponent<Rigidbody2D>();
             body.freezeRotation = true;
             body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;

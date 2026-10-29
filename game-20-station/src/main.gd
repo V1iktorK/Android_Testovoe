@@ -7,13 +7,13 @@ const Dungeon := preload("res://logic/dungeon_gen.gd")
 enum State { MENU, MAP, ROOM, UPGRADE, GAMEOVER, VICTORY }
 
 const COLORS := {
-	"bg": Color(0.07, 0.08, 0.13),
-	"room": Color(0.13, 0.15, 0.22),
-	"combat": Color(0.85, 0.3, 0.3),
-	"treasure": Color(0.95, 0.8, 0.3),
-	"shop": Color(0.4, 0.75, 0.9),
-	"lab": Color(0.55, 0.85, 0.55),
-	"boss": Color(0.75, 0.25, 0.85),
+	"bg": Color(0.015, 0.03, 0.05),
+	"room": Color(0.05, 0.12, 0.16),
+	"combat": Color(0.2, 0.95, 1.0),
+	"treasure": Color(1.0, 0.82, 0.25),
+	"shop": Color(0.3, 0.85, 0.95),
+	"lab": Color(0.35, 1.0, 0.75),
+	"boss": Color(1.0, 0.45, 0.85),
 	"entrance": Color(0.6, 0.65, 0.75),
 }
 
@@ -138,7 +138,7 @@ func _draw() -> void:
 	var font := ThemeDB.fallback_font
 	match state:
 		State.MENU:
-			draw_string(font, Vector2(size.x / 2, size.y * 0.36), "СТАНЦИЯ-ПАДЕНИЕ", HORIZONTAL_ALIGNMENT_CENTER, -1, 84, Color(0.4, 0.9, 1))
+			draw_string(font, Vector2(size.x / 2, size.y * 0.36), "СТАНЦИЯ-ПАДЕНИЕ", HORIZONTAL_ALIGNMENT_CENTER, -1, 84, Color(0.25, 1.0, 1.0))
 			draw_string(font, Vector2(size.x / 2, size.y * 0.46), "рогалик-шутер: процедурные комнаты станции", HORIZONTAL_ALIGNMENT_CENTER, -1, 34, Color(0.8, 0.85, 0.95))
 			draw_string(font, Vector2(size.x / 2, size.y * 0.58), "тап — начать забег", HORIZONTAL_ALIGNMENT_CENTER, -1, 38, Color(1, 0.85, 0.4))
 		State.MAP:
@@ -165,6 +165,6 @@ func draw_map(size: Vector2, font: Font) -> void:
 		var kind: String = rooms[i]["kind"]
 		draw_rect(r, COLORS.get(kind, Color.GRAY))
 		draw_rect(r, Color(0, 0, 0, 0.35))
-		draw_string(font, Vector2(r.position.x + 18, r.position.y + r.size.y * 0.4), kind, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, Color.WHITE)
+		draw_string(font, Vector2(r.position.x + 18, r.position.y + r.size.y * 0.4), kind, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, Color(0.25, 1.0, 1.0))
 		draw_string(font, Vector2(r.position.x + 18, r.position.y + r.size.y * 0.72), "угроза %d" % int(rooms[i]["enemy_power"]), HORIZONTAL_ALIGNMENT_LEFT, -1, 22, Color(0.9, 0.9, 0.9))
 	draw_string(font, Vector2(size.x / 2, size.y * 0.93), log_text, HORIZONTAL_ALIGNMENT_CENTER, -1, 30, Color(1, 0.85, 0.5))

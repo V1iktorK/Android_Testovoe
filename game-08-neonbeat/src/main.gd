@@ -7,7 +7,7 @@ const Chart := preload("res://logic/chart_generator.gd")
 enum State { MENU, TRACK_SELECT, PLAY, RESULTS }
 
 const LANE_COLORS := [Color(0.2, 0.95, 0.95), Color(1.0, 0.35, 0.75), Color(0.55, 0.9, 0.3), Color(0.95, 0.8, 0.25)]
-const BG := Color(0.05, 0.04, 0.12)
+const BG := Color(0.15, 0.05, 0.26)
 
 # Треки: BPM и сложность
 const TRACKS := [
@@ -215,6 +215,7 @@ func handle_touch(pos: Vector2) -> void:
 
 func _draw() -> void:
 	draw_rect(Rect2(0, 0, 1280, 1280), BG)
+	draw_stage()
 	var font := ThemeDB.fallback_font
 	match state:
 		State.MENU:
@@ -251,6 +252,20 @@ func grade_color() -> Color:
 			return Color(0.4, 0.75, 1.0)
 	return Color(0.8, 0.5, 0.5)
 
+
+
+func draw_stage() -> void:
+	# прожекторы сцены
+	for i in 3:
+		var x := 120.0 + i * 320.0
+		draw_colored_polygon(PackedVector2Array([
+			Vector2(x, 0), Vector2(x + 220, 0), Vector2(x + 460, 1200), Vector2(x - 240, 1200)
+		]), Color(0.85, 0.55, 1.0, 0.07))
+	# силуэты зрителей внизу
+	for i in 14:
+		var hx := 40.0 + i * 92.0
+		draw_circle(Vector2(hx, 1245), 34, Color(0.06, 0.02, 0.12))
+		draw_rect(Rect2(hx - 40, 1245, 80, 60), Color(0.06, 0.02, 0.12))
 
 func draw_playfield(font: Font) -> void:
 	var lane_w := 320.0

@@ -34,12 +34,13 @@ public final class PetView extends View {
     private RectF petRect = new RectF();
     private PetSound sound = new PetSound();
 
-    // Пастельная палитра
-    private final int bg = Color.rgb(255, 243, 224);
+    // Визуальная подпись: НАКЛЕЙКИ — мятно-розовый фон, толстые белые контуры, глянец
+    private final int bg = Color.rgb(214, 242, 236);
     private final int card = Color.rgb(255, 255, 255);
-    private final int textBrown = Color.rgb(94, 66, 52);
-    private final int accent = Color.rgb(255, 159, 125);
-    private final int mint = Color.rgb(164, 221, 192);
+    private final int textBrown = Color.rgb(72, 42, 92);
+    private final int accent = Color.rgb(255, 105, 180);
+    private final int mint = Color.rgb(126, 214, 194);
+    private final int stickerOutline = Color.WHITE;
 
     public PetView(Context context) {
         super(context);
@@ -114,15 +115,23 @@ public final class PetView extends View {
         float bounce = (float) (Math.sin(now / 350.0) * r * 0.04);
         petRect = new RectF(cx - r, cy - r + bounce, cx + r, cy + r + bounce);
 
-        // тень
-        paint.setColor(Color.argb(30, 94, 66, 52));
-        canvas.drawOval(new RectF(cx - r * 0.8f, cy + r * 0.9f, cx + r * 0.8f, cy + r * 1.15f), paint);
+        // тень-подложка наклейки
+        paint.setColor(Color.argb(35, 72, 42, 92));
+        canvas.drawOval(new RectF(cx - r * 0.8f, cy + r * 0.95f, cx + r * 0.8f, cy + r * 1.2f), paint);
+
+        // белый контур наклейки (толстая обводка по силуэту)
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(r * 0.22f);
+        paint.setColor(stickerOutline);
+        canvas.drawOval(new RectF(cx - r * 0.85f, cy - r * 0.25f + bounce, cx + r * 0.85f, cy + r + bounce), paint);
+        canvas.drawCircle(cx, cy - r * 0.25f + bounce, r * 0.72f, paint);
+        paint.setStyle(Paint.Style.FILL);
 
         // тело
-        paint.setColor(Color.rgb(255, 214, 170));
+        paint.setColor(Color.rgb(255, 183, 120));
         canvas.drawOval(new RectF(cx - r * 0.85f, cy - r * 0.25f + bounce, cx + r * 0.85f, cy + r + bounce), paint);
         // ушки
-        paint.setColor(Color.rgb(255, 196, 150));
+        paint.setColor(Color.rgb(240, 150, 90));
         Path earL = new Path();
         earL.moveTo(cx - r * 0.75f, cy - r * 0.35f + bounce);
         earL.lineTo(cx - r * 0.55f, cy - r * 1.15f + bounce);
@@ -136,14 +145,14 @@ public final class PetView extends View {
         earR.close();
         canvas.drawPath(earR, paint);
         // голова
-        paint.setColor(Color.rgb(255, 222, 183));
+        paint.setColor(Color.rgb(255, 206, 150));
         canvas.drawCircle(cx, cy - r * 0.25f + bounce, r * 0.72f, paint);
         // глаза
         paint.setColor(textBrown);
         canvas.drawCircle(cx - r * 0.28f, cy - r * 0.32f + bounce, r * 0.09f, paint);
         canvas.drawCircle(cx + r * 0.28f, cy - r * 0.32f + bounce, r * 0.09f, paint);
         // нос и улыбка
-        paint.setColor(Color.rgb(235, 130, 120));
+        paint.setColor(Color.rgb(255, 90, 130));
         canvas.drawCircle(cx, cy - r * 0.12f + bounce, r * 0.08f, paint);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(r * 0.05f);
