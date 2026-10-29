@@ -46,3 +46,6 @@ node_modules/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Упаковка для Google Диска (генерируется tools\make-dist.ps1)
+dist/
